@@ -9,5 +9,8 @@ data class User(
     val name: String,
     val role: String, // "admin", "agent", "client"
     val contact: String,
-    val isBanned: Boolean = false
+    val isBanned: Boolean = false,
+    val password: String
 )
+
+

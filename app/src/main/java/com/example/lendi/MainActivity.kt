@@ -36,6 +36,6 @@ class MainActivity : AppCompatActivity() {
         userViewModel = ViewModelProvider(this, factory).get(UserViewModel::class.java)
 
         // Example: Insert a user
-        userViewModel.addUser(User(name = "Maqhawe", role = "admin", contact = "123456789"))
+
     }
 }

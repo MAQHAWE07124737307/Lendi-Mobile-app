@@ -6,4 +6,5 @@ import com.example.lendi.data.entity.User
 class UserRepository(private val userDao: UserDao) {
     suspend fun insertUser(user: User) = userDao.insertUser(user)
     suspend fun getAllUsers() = userDao.getAllUsers()
+    suspend fun  loginUser(username: String, password: String)= userDao.loginUser(username, password)
 }
