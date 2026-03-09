@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.lendi.data.LendiDatabase
 import com.example.lendi.repository.UserRepository
 import com.example.lendi.ui.borrower.BorrowerActivity
+import com.example.lendi.ui.lender.LenderActivity
+import com.example.lendi.ui.lender.LenderScreen
 import com.example.lendi.viewmodel.UserViewModel
 import com.example.lendi.viewmodel.UserViewModelFactory
 import com.example.myapplication.R
@@ -51,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
                 if (user != null) {
                     when (user.role) {
                         "borrower" -> startActivity(Intent(this@LoginActivity, BorrowerActivity::class.java))
-                       // "lender" -> startActivity(Intent(this@LoginActivity, LenderActivity::class.java))
+                        "lender" -> startActivity(Intent(this@LoginActivity, LenderActivity::class.java))
                       //  "admin" -> startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
                         else -> Toast.makeText(this@LoginActivity, "Unknown role", Toast.LENGTH_SHORT).show()
                     }

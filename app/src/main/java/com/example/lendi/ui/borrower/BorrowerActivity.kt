@@ -32,17 +32,8 @@ class BorrowerActivity : AppCompatActivity() {
             val db = LendiDatabase.getDatabase(this@BorrowerActivity)
             val loanDao = db.loanDao()
 
-            // Seed only if DB is empty
-            val existing = loanDao.getAllLoans()
-            if (existing.isEmpty()) {
-                val sampleLoans = listOf(
-                    Loan(clientId = 1, amount = 2000.0, status = "Pending", date = "2026-03-01"),
-                    Loan(clientId = 1, amount = 1500.0, status = "Approved", date = "2026-02-28"),
-                    Loan(clientId = 2, amount = 5000.0, status = "Pending", date = "2026-03-02"),
-                    Loan(clientId = 2, amount = 2500.0, status = "Approved", date = "2026-02-27")
-                )
-                sampleLoans.forEach { loanDao.insertLoan(it) }
-            }
+
+
 
             // Fetch last 4 loans
             val loans = withContext(Dispatchers.IO) { loanDao.getAllLoans().takeLast(4) }
