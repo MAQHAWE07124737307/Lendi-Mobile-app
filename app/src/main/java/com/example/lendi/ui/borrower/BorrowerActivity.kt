@@ -2,11 +2,51 @@ package com.example.lendi.ui.borrower
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.lendi.data.LendiDatabase
+import com.example.lendi.data.entity.Loan
 import com.example.myapplication.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class BorrowerActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var loanAdapter: LoanAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_borrower)
+
+        // 1️⃣ Setup RecyclerView
+        recyclerView = findViewById(R.id.recentLoansRecycler)
+        loanAdapter = LoanAdapter()
+        recyclerView.adapter = loanAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        // 2️⃣ Seed some sample loans and display
+        lifecycleScope.launch {
+            val db = LendiDatabase.getDatabase(this@BorrowerActivity)
+            val loanDao = db.loanDao()
+
+            // Seed only if DB is empty
+            val existing = loanDao.getAllLoans()
+            if (existing.isEmpty()) {
+                val sampleLoans = listOf(
+                    Loan(clientId = 1, amount = 2000.0, status = "Pending", date = "2026-03-01"),
+                    Loan(clientId = 1, amount = 1500.0, status = "Approved", date = "2026-02-28"),
+                    Loan(clientId = 2, amount = 5000.0, status = "Pending", date = "2026-03-02"),
+                    Loan(clientId = 2, amount = 2500.0, status = "Approved", date = "2026-02-27")
+                )
+                sampleLoans.forEach { loanDao.insertLoan(it) }
+            }
+
+            // Fetch last 4 loans
+            val loans = withContext(Dispatchers.IO) { loanDao.getAllLoans().takeLast(4) }
+            loanAdapter.updateLoans(loans)
+        }
     }
 }

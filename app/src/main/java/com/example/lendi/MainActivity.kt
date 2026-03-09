@@ -7,6 +7,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.lendi.data.LendiDatabase
+import com.example.lendi.data.dao.LoanDao
+import com.example.lendi.data.entity.Loan
 import com.example.lendi.data.entity.User
 import com.example.lendi.repository.UserRepository
 import com.example.lendi.viewmodel.UserViewModel
@@ -31,11 +33,12 @@ class MainActivity : AppCompatActivity() {
         val db = LendiDatabase.getDatabase(this)
         val userDao = db.userDao()
         val repository = UserRepository(userDao)
+
         val factory = UserViewModelFactory(repository)
 
         userViewModel = ViewModelProvider(this, factory).get(UserViewModel::class.java)
 
-        // Example: Insert a user
+        // Seed temporary loans
 
     }
 }

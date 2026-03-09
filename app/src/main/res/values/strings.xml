@@ -7,4 +7,17 @@
     <string name="forgot_password">forgot_password</string>
     <string name="no_account">no_account</string>
     <string name="sign_up">/sign_up</string>
+    <string name="active_loan">Active Loan</string>
+    <string name="r_5_000">R 5,000</string>
+    <string name="next_payment_30_may">Next payment: 30 May</string>
+    <string name="r_2000_pending">R 2000 • Pending</string>
+    <string name="welcome_borrower">Welcome Borrower</string>
+    <string name="manage_your_loans_easily">Manage your loans easily</string>
+    <string name="request_loan">Request Loan</string>
+    <string name="pay_loan">Pay Loan</string>
+    <string name="history">History</string>
+    <string name="recent_activity">Recent Activity</string>
+    <string name="loan_request">Loan Request</string>
+    <string name="r2000_pending">R2000 Pending</string>
+    <string name="loan_requesT">Loan Request</string>
 </resources>
